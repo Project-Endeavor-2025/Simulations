@@ -50,6 +50,7 @@ scene.autoscale = False
 
 #balloon
 balloon = sphere(pos = vector(x[0], y[0], z[0]), radius = 200, color = color.red, make_trail = True, trail_type = 'points', interval = 10, retain = 200)
+scene.follow(balloon)
 
 #Tether
 tether = cylinder(pos = vector(x[0], y[0], 0), axis = vector(0, 0, z[0]), radius = 5, color = color.gray(0.5))
