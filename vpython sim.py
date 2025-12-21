@@ -43,6 +43,11 @@ scene.background = color.cyan
 scene.center = vector(0, 0, 15000)
 scene.range = 50000
 
+scene.userspin = True
+scene.userzoom = True
+scene.userpan = True
+scene.autoscale = False
+
 #balloon
 balloon = sphere(pos = vector(x[0], y[0], z[0]), radius = 200, color = color.red, make_trail = True, trail_type = 'points', interval = 10, retain = 200)
 
