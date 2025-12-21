@@ -1,5 +1,6 @@
 from vpython import *
 import numpy as np
+from matplotlib import cm
 
 dt = 1
 t_max = 6*60*60
@@ -59,6 +60,7 @@ tether = cylinder(pos = vector(x[0], y[0], 0), axis = vector(0, 0, z[0]), radius
 wind_arrow = arrow(pos = vector(x[0], y[0], z[0]), axis = vector(50, 50, 0), shaftwidth = 10, color = color.white)
 
 #animation loop
+plasma = cm.get_cmap('plasma')
 for i in range(1,len(z)):
     rate(50)    #animation speed
     balloon.pos = vector(x[i], y[i], z[i])
@@ -68,8 +70,9 @@ for i in range(1,len(z)):
     tether.axis = vector(0, 0, z[i])
 
     #balloon color (based on radiation)
-    rad_norm = (measured_radiation[i]-min(measured_radiation))/(max(measured_radiation) - min(measured_radiation))
-    balloon.color= vector(rad_norm, 0, 1 - rad_norm)
+    rad_norm = (measured_radiation[i] - min(measured_radiation)) / (max(measured_radiation) - min(measured_radiation))
+    c = plasma(rad_norm)
+    balloon.color = vector(c[0], c[1], c[2])
 
     wind_arrow.pos = balloon.pos
     wind_arrow.axis = vector(wind_speed[i]*10*np.cos(wind_direction), wind_speed[i]*10*np.sin(wind_direction), 0)
