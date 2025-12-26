@@ -4,6 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 from matplotlib.animation import FuncAnimation
+import json
 
 dt = 1 #seconds
 t_max = 6*60*60 #6 hours
@@ -120,3 +121,21 @@ cbar.set_label("Radiation (µSv/hr)")
 plt.show()
 
 
+
+
+
+#data export
+flight_data = []
+for i in range(len(z)):
+    flight_data.append({
+        "x": float(x[i]),
+        "y": float(y[i]),
+        "z": float(z[i]),
+        "radiation": float(measured_radiation[i]),
+        "wind": float(wind_speed[i])
+    })
+
+with open("balloon_flight.json", "w") as f:
+    json.dump(flight_data, f)
+
+print("Saved balloon_flight.json")
